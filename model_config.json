@@ -1,0 +1,16 @@
+{
+    "features": [
+        "name_exact",
+        "name_similarity",
+        "address_exact",
+        "address_similarity",
+        "country_match"
+    ],
+    "threshold": 0.1,
+    "model_type": "HistGradientBoostingClassifier",
+    "validation_f1": 0.9971,
+    "test_accuracy": 0.9944,
+    "test_precision": 0.9971,
+    "test_recall": 0.9969,
+    "test_f1": 0.997
+}
