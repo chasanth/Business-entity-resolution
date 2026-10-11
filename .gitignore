@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+# Large datasets
+TEST/
+test_index/
+train_source*.tsv
+entity_matching_dataset.tsv
+entity_matching_clean.tsv
+train_ground_truth.tsv
+positive_pairs.tsv
+positive_features.tsv
+negative_features.tsv
+
+# Competition outputs
+output/
+outputs/
+matching_results*.tsv
+candidate_pairs*.tsv
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Environment
+.venv/
+venv/
+env/
+
+# Secrets
+.env
