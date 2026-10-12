@@ -1,110 +1,31 @@
-# Entity Matching Model
 
-An ML-based entity matching system that determines whether two entity records refer to the same real-world entity.
 
-The project uses entity attributes such as name, address, and country to generate similarity features and classify entity pairs as MATCH or NON-MATCH.
+# Amazon ML Challenge 2026 — Business Entity Resolution
 
----
+## Project Summary
 
-## Problem Statement
+Developed a scalable **entity resolution and business matching system** for the Amazon ML Challenge 2026. The objective was to identify matching business records across multiple large-scale data sources despite variations in names, addresses, formatting, and missing information.
 
-Entity matching is the task of identifying whether two records represent the same real-world entity.
-
-For example:
-
-Record A:
-- Name: Apple Inc
-- Address: One Apple Park Way
-- Country: USA
-
-Record B:
-- Name: Apple Inc.
-- Address: One Apple Park Way
-- Country: USA
-
-The model predicts whether these two records belong to the same entity.
-
----
+The pipeline was designed to efficiently process **millions of business records** while balancing matching accuracy and computational efficiency.
 
 ## Approach
 
-The complete pipeline is:
+- **Data Preprocessing:** Cleaned and normalized business names and addresses by standardizing abbreviations, removing punctuation, and handling text variations.
+- **Candidate Generation:** Applied name and address-based blocking to reduce the search space before detailed matching.
+- **Feature Engineering:** Generated exact-match and fuzzy-similarity features for business names and addresses, along with country matching.
+- **Machine Learning:** Trained a `HistGradientBoostingClassifier` to classify candidate pairs as **MATCH** or **NON-MATCH**.
+- **Threshold Optimization:** Evaluated different prediction thresholds to balance precision and recall.
+- **Validation:** Implemented checks for duplicate records, invalid IDs, candidate consistency, and final prediction integrity.
 
-Dataset
-→ Entity Pair Generation
-→ Feature Engineering
-→ Data Cleaning
-→ Train/Validation/Test Split
-→ Class Balancing
-→ Model Training
-→ Threshold Analysis
-→ Evaluation
-→ Model Saving
-→ Inference
+## Results
 
----
+- **99.70% F1-score** on internal pair-level evaluation
+- **99.71% Precision**
+- **99.69% Recall**
+- **99.94% ROC-AUC**
+- **~95.03% diagnostic blocking recall**
+- **0.482 Amazon ML Challenge 2026 leaderboard score**
 
-## Features
+## Technologies
 
-Five features were used for entity matching:
-
-| Feature | Description |
-|---|---|
-| `name_exact` | Exact match between entity names |
-| `name_similarity` | Similarity between entity names |
-| `address_exact` | Exact match between addresses |
-| `address_similarity` | Similarity between addresses |
-| `country_match` | Whether the countries match |
-
----
-
-## Dataset Preparation
-
-The dataset contains positive and negative entity pairs.
-
-### Positive pairs
-
-Pairs known to represent the same entity.
-
-### Negative pairs
-
-Pairs generated from different entities to represent non-matches.
-
-The final combined dataset contained:
-
-- Positive pairs: 7,763,365
-- Negative pairs: 500,000
-- Total pairs: 8,263,365
-
-After removing records with missing matched entity IDs from the positive data, the final training dataset was prepared for modeling.
-
----
-
-## Data Split
-
-The dataset was divided into:
-
-- Training: 6,510,692 samples
-- Validation: 813,836 samples
-- Test: 813,837 samples
-
-The training data was balanced before model training.
-
-### Balanced Training Set
-
-- Positive: 400,000
-- Negative: 400,000
-- Total: 800,000
-
-The validation and test sets were retained separately for unbiased evaluation.
-
----
-
-## Model
-
-A gradient-boosting classification model was trained using the five engineered features.
-
-The trained model is saved as:
-
-```text
-entity_matching_model.pkl
+**Python • Pandas • NumPy • Scikit-learn • RapidFuzz • SQLite • Machine Learning • NLP • Entity Resolution**
